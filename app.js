@@ -7,6 +7,14 @@ function loadData(url, callback){
 
     xhr.open('GET', url, true);
     xhr.send();
+    
+    xhr.onload = function() {
+    if (xhr.status !== 200) { // analyze HTTP status of the response
+        console.log(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+    } else { // show the result
+        console.log(`Done, got ${xhr.response.length} bytes`); // response is the server
+  }
+};
 };
 
 loadData(`https://bco-service-a-com.central-product.aws-eu-west-1.prod.williamhill.plc/v1/offers?langCode=en-gb&jurisdiction=com`, res => {
