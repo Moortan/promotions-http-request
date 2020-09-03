@@ -26,6 +26,21 @@ const modal = document.getElementById("myModal");
 const acceptPromoBtn = document.getElementById("acceptPromo");
 const declinePromoBtn = document.getElementById("declinePromo");
 
+function disablePromo(promotions, i) {
+
+    //change the style of promo which is disabled
+    console.log(promotions[i].slug);
+    document.getElementById(promotions[i].slug).style.background = "#A9A9A9";
+
+    //		document.getElementById("promo_ctaLabel_" + i)
+    //                .style.background = "#C0C0C0";
+
+    document.getElementById("promo_ctaLabel_" + i).classList.add("disabledButton");
+
+    //disable button of disabled promo
+    ctaBtn[i].disabled = true;
+}
+
 function createHtmlElements(promotions) {
 	let template = ``;
 
@@ -33,7 +48,7 @@ function createHtmlElements(promotions) {
 
 		//create HTML elements based on promotions[] 
 		template += `
-            <div class="promoContainer" id=${promotions[i].title}>
+            <div class="promoContainer" id=${promotions[i].slug}>
                     <h1 class="promoClass" id="promo_title_${i}">"test"{{promo_title}}</h1>
 
                     <button class="ctaButton" id="promo_ctaLabel_${i}">{{ctaLabel}}</button>
@@ -73,7 +88,7 @@ function main(promotions){
 
 			acceptPromoBtn.onclick = () => {
 
-
+                disablePromo(promotions, i);
 				//close the window
 				modal.style.display = "none";
 
